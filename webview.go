@@ -4,6 +4,7 @@ import (
 	"embed"
 	"fmt"
 
+	"github.com/cratonica/trayhost"
 	"github.com/webview/webview"
 )
 
@@ -34,5 +35,13 @@ func main() {
 	}
 
 	w.Navigate("data:text/html," + string(data))
+	w.Dispatch(func() {
+		trayhost.SetWindow(w.Window(), "title", iconData)
+	})
 	w.Run()
+
+	// Enter the host system's event loop
+
+	// This is only reached once the user chooses the Exit menu item
+	fmt.Println("Exiting")
 }
