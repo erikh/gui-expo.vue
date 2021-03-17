@@ -27,8 +27,6 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(string(data))
-
 	w.Init("window.onload = () => {" + string(data) + "};")
 	data, err = fs.ReadFile("frontend/public/index.html")
 	if err != nil {
