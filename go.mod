@@ -1,4 +1,4 @@
-module github.com/erikh/gui-exploration/webview/vue
+module github.com/erikh/gui-expo.vue
 
 go 1.16
 
