@@ -4,7 +4,7 @@ import (
 	"embed"
 	"fmt"
 
-	"github.com/cratonica/trayhost"
+	"github.com/getlantern/systray"
 	"github.com/webview/webview"
 )
 
@@ -14,6 +14,7 @@ var fs embed.FS
 
 func main() {
 	debug := true
+
 	w := webview.New(debug)
 	defer w.Destroy()
 	w.SetTitle("Minimal vue example")
@@ -36,7 +37,10 @@ func main() {
 
 	w.Navigate("data:text/html," + string(data))
 	w.Dispatch(func() {
-		trayhost.SetWindow(w.Window(), "title", iconData)
+		systray.Run(func() {
+			systray.SetIcon(iconData)
+			systray.SetTooltip("Minimal vue example")
+		}, func() {})
 	})
 	w.Run()
 
