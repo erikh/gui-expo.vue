@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = (env, options) => ({
+  mode: "production",
   entry: "./src",
   plugins: [],
   output: {
