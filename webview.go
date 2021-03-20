@@ -36,12 +36,12 @@ func main() {
 	}
 
 	w.Navigate("data:text/html," + string(data))
-	w.Dispatch(func() {
-		systray.Run(func() {
-			systray.SetIcon(iconData)
-			systray.SetTooltip("Minimal vue example")
-		}, func() {})
-	})
+
+	systray.Register(func() {
+		systray.SetIcon(iconData)
+		systray.SetTooltip("Minimal vue example")
+	}, func() {})
+
 	w.Run()
 
 	// Enter the host system's event loop
