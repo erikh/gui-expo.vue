@@ -38,3 +38,6 @@ distclean: clean
 	rm -f gui.7z
 
 .PHONY: distclean
+
+test:
+	go test -v ./... -count 1
