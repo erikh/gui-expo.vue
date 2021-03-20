@@ -67,5 +67,4 @@ func TestPollSyncBasic(t *testing.T) {
 	if !reflect.DeepEqual(i.Data("test2"), y) {
 		t.Fatal("we are not getting the right data back from y")
 	}
-
 }
