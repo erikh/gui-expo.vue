@@ -1,5 +1,7 @@
+NODE_ENV ?=
+
 frontend:
-	cd frontend && npm run build
+	cd frontend && NODE_ENV=${NODE_ENV} npm run build
 
 .PHONY: frontend
 
