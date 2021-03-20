@@ -37,10 +37,12 @@ func main() {
 
 	w.Navigate("data:text/html," + string(data))
 
-	systray.Register(func() {
-		systray.SetIcon(iconData)
-		systray.SetTooltip("Minimal vue example")
-	}, func() {})
+	w.Dispatch(func() {
+		systray.Register(func() {
+			systray.SetIcon(iconData)
+			systray.SetTooltip("Minimal vue example")
+		}, func() {})
+	})
 
 	w.Run()
 
