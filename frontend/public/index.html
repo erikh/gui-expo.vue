@@ -2,6 +2,8 @@
 <html>
   <body id="app">
     <div id="counter">Counter: {{ counter }}</div>
-    <button onClick="clicked();">Click Me</button>
+    <button @click="click();">Click Me</button>
+    <input v-model="networkID" />
+    <div>{{ networkName }}</div>
   </body>
 </html>

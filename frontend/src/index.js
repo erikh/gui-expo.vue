@@ -1,16 +1,17 @@
 import { createApp } from "vue";
 
-const RootComponent = {
+const NetworkDisplayComponent = {
   data() {
     return {
-      counter: 0,
+      networkID: "",
+      networkName: "",
     };
   },
-  mounted() {
-    setInterval(() => {
-      this.counter++;
-    }, 1000);
+  watch: {
+    networkID(newNetwork, old) {
+      getNetworkName(newNetwork).then((r) => (this.networkName = r));
+    },
   },
 };
 
-createApp(RootComponent).mount("#app");
+createApp(NetworkDisplayComponent).mount("#app");
