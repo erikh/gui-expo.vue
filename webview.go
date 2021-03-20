@@ -35,19 +35,16 @@ func main() {
 		panic(err)
 	}
 
-	w.Navigate("data:text/html," + string(data))
-
 	w.Dispatch(func() {
 		systray.Register(func() {
 			systray.SetIcon(iconData)
 			systray.SetTooltip("Minimal vue example")
-		}, func() {})
+		}, func() {
+		})
 	})
 
+	w.Navigate("data:text/html," + string(data))
 	w.Run()
 
-	// Enter the host system's event loop
-
-	// This is only reached once the user chooses the Exit menu item
 	fmt.Println("Exiting")
 }
