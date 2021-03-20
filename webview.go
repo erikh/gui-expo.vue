@@ -16,10 +16,6 @@ import (
 var fs embed.FS
 
 func getNetworkName(id string) (string, error) {
-	if len(id) != 16 {
-		return "", nil
-	}
-
 	client := ztcentral.NewClient(os.Getenv("ZEROTIER_CENTRAL_TOKEN"))
 	network, err := client.GetNetwork(context.Background(), id)
 	if err != nil {

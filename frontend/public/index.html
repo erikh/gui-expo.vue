@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <body id="app">
-    <div id="counter">Counter: {{ counter }}</div>
-    <button @click="click();">Click Me</button>
-    <input v-model="networkID" />
-    <div>{{ networkName }}</div>
+    <div>Counter: {{ counter }}</div>
+    <network-display v-model="networkID"></network-display>
+    <div>Network Name: {{ networkName }}</div>
   </body>
 </html>
