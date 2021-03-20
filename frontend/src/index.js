@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 
-const Counter = {
+const RootComponent = {
   data() {
     return {
       counter: 0,
@@ -13,4 +13,4 @@ const Counter = {
   },
 };
 
-createApp(Counter).mount("#counter");
+createApp(RootComponent).mount("#app");
