@@ -1,49 +1,12 @@
 import { createApp } from "vue";
-
-const NetworkList = {
-  data() {
-    return {
-      list: [],
-    };
-  },
-  template: `
-  <ul v-for="n in list">
-    <li>{{ n.name }}: {{ n.id }} | {{ n.mac }} | {{ n.portDeviceName }}</li>
-  </ul>
-  `,
-  mounted() {
-    setInterval(() => {
-      getNetworks()
-        .then(JSON.parse)
-        .then((r) => (this.list = r));
-    }, 1000);
-  },
-};
-
-const NetworkDisplayComponent = {
-  props: ["networkID"],
-  emits: ["update:networkID"],
-  data() {
-    return {
-      networkID: "",
-    };
-  },
-  template: `
-  <input v-model="networkID" />
-  `,
-  computed: {
-    networkID: {
-      get() {
-        return this.networkID;
-      },
-      set(newNetwork) {
-        this.$emit("update:networkID", newNetwork);
-      },
-    },
-  },
-};
+import NetworkList from "./components/network-list.vue";
+import NetworkDisplay from "./components/network-display.vue";
 
 const RootComponent = {
+  components: {
+    "network-list": NetworkList,
+    "network-display": NetworkDisplay,
+  },
   data() {
     return {
       counter: 0,
@@ -67,7 +30,4 @@ const RootComponent = {
   },
 };
 
-app = createApp(RootComponent);
-app.component("network-display", NetworkDisplayComponent);
-app.component("network-list", NetworkList);
-app.mount("#app");
+createApp(RootComponent).mount("#app");
