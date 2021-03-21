@@ -45,6 +45,28 @@ type Route struct {
 	Metric int64  `json:"metric"`
 }
 
+type Peer struct {
+	Address      string `json:"address"`
+	VersionMajor int64  `json:"versionMajor"`
+	VersionMinor int64  `json:"versionMinor"`
+	VersionRev   int64  `json:"versionRev"`
+	Version      string `json:"version"`
+	Latency      int64  `json:"latency"`
+	// Enum: LEAF / UPSTREAM / ROOT / PLANET
+	Role  string `json:"role"`
+	Paths []Path `json:"paths"`
+}
+
+type Path struct {
+	Address       string `json:"address"`
+	LastSend      int64  `json:"lastSend"`
+	LastReceive   int64  `json:"lastReceive"`
+	Active        bool   `json:"active"`
+	Expired       bool   `json:"expired"`
+	Preferred     bool   `json:"preferred"`
+	TrustedPathID int64  `json:"trustedPathId"`
+}
+
 func (c *Client) Status() (*NetworkStatus, error) {
 	ns := &NetworkStatus{}
 	return ns, c.wrapJSON("/status", ns)
@@ -53,4 +75,14 @@ func (c *Client) Status() (*NetworkStatus, error) {
 func (c *Client) Networks() ([]*Network, error) {
 	nws := []*Network{}
 	return nws, c.wrapJSON("/network", &nws)
+}
+
+func (c *Client) Network(id string) (*Network, error) {
+	nw := &Network{}
+	return nw, c.wrapJSON("/network/"+id, nw)
+}
+
+func (c *Client) Peers() ([]*Peer, error) {
+	peers := []*Peer{}
+	return peers, c.wrapJSON("/peer", &peers)
 }
