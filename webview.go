@@ -4,26 +4,14 @@ import (
 	"context"
 	"embed"
 	"fmt"
-	"os"
 
 	"github.com/getlantern/systray"
 	"github.com/webview/webview"
-	"github.com/zerotier/go-ztcentral"
 )
 
 //go:embed frontend/build
 //go:embed frontend/public
 var fs embed.FS
-
-func getNetworkName(id string) (string, error) {
-	client := ztcentral.NewClient(os.Getenv("ZEROTIER_CENTRAL_TOKEN"))
-	network, err := client.GetNetwork(context.Background(), id)
-	if err != nil {
-		return "", err
-	}
-
-	return network.Config.Name, nil
-}
 
 func main() {
 	debug := true
@@ -31,8 +19,6 @@ func main() {
 	w := webview.New(debug)
 	defer w.Destroy()
 	w.SetTitle("Minimal vue example")
-
-	w.Bind("getNetworkName", getNetworkName)
 
 	data, err := fs.ReadFile("frontend/build/bundle.js")
 	if err != nil {
@@ -45,6 +31,11 @@ func main() {
 		panic(err)
 	}
 
+	ctx, cancel := context.WithCancel(context.Background())
+	w.Dispatch(func() {
+		syncInit(ctx, w)
+	})
+
 	w.Dispatch(func() {
 		systray.Register(func() {
 			systray.SetIcon(iconData)
@@ -56,5 +47,6 @@ func main() {
 	w.Navigate("data:text/html," + string(data))
 	w.Run()
 
+	cancel()
 	fmt.Println("Exiting")
 }

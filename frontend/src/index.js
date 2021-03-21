@@ -39,7 +39,9 @@ const RootComponent = {
   watch: {
     networkID(newNetwork, old) {
       if (newNetwork.length == 16) {
-        getNetworkName(newNetwork).then((r) => (this.networkName = r));
+        getNetwork(newNetwork)
+          .then((r) => JSON.parse(r))
+          .then((r) => (this.networkName = r.name));
       }
     },
   },
