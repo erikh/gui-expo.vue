@@ -15,7 +15,7 @@ func syncInit(ctx context.Context, w webview.WebView) {
 	c := one.NewClient(os.Getenv("ZEROTIER_ONE_TOKEN"))
 	ps := pollsync.New(ctx)
 
-	ps.Register(time.Second, "networks", func(ctx context.Context) (interface{}, error) {
+	ps.Register(500*time.Millisecond, "networks", func(ctx context.Context) (interface{}, error) {
 		return c.Networks()
 	})
 

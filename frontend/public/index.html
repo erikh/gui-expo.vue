@@ -3,6 +3,9 @@
   <body id="app">
     <div>Counter: {{ counter }}</div>
     <network-display v-model="networkID"></network-display>
-    <div>Network Name: {{ networkName }}</div>
+    <div>Network Name: {{ queriedNetwork.name }}</div>
+    <div>Network ID: {{ queriedNetwork.id }}</div>
+    <div>Network List:</div>
+    <network-list></network-list>
   </body>
 </html>
