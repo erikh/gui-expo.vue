@@ -16,6 +16,7 @@ module.exports = (env, options) => ({
       },
     ],
   },
+  target: "node-webkit",
   plugins: [new VueLoaderPlugin()],
   output: {
     filename: "bundle.js",
